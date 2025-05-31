@@ -1,0 +1,8 @@
+# Data
+data/processed/
+models/
+metrics.json
+
+# Python
+__pycache__/
+*.py[cod]
