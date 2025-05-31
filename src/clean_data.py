@@ -1,8 +1,8 @@
-def clear_data():
-    df = pd.read_csv('https://raw.githubusercontent.com/Alexey3250/Start_ML/refs/heads/main/Machine_learning/10_classification/banking.csv', delimiter = ',')
+import pandas as pd
 
-    ### Уберем колонку duration
-
+def clean_data(input_path, output_path):
+    df = pd.read_csv(input_path)
+    df = df.dropna().drop_duplicates()  # Удаляем пропуски и дубликаты
     df = df.drop('duration', axis=1)
     ### Посмотрим на категориальные колонки
 
@@ -26,3 +26,12 @@ def clear_data():
     categorical_columns = df.loc[:,df.dtypes=='object'].columns
     
     df = df.reset_index(drop=True) 
+    df.to_csv(output_path, index=False)
+
+if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--input", type=str, required=True)
+    parser.add_argument("--output", type=str, required=True)
+    args = parser.parse_args()
+    clean_data(args.input, args.output)
