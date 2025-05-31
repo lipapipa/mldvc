@@ -1,0 +1,8 @@
+stages:
+  clean_data:
+    cmd: python src/clean_data.py --input data/raw/banking.csv --output data/cleaned.csv
+    deps:
+      - data/raw/banking.csv
+      - src/clean_data.py
+    outs:
+      - data/cleaned.csv
