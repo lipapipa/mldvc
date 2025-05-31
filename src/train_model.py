@@ -2,6 +2,7 @@ import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 import joblib
+import os
 
 def train_model(input_path, model_path):
     df = pd.read_csv(input_path)
@@ -19,9 +20,10 @@ def train_model(input_path, model_path):
     )
     model.fit(X_train, y_train)
     
+    os.makedirs(os.path.dirname(model_path), exist_ok=True)
     joblib.dump(model, model_path)
 
-if __name__ == "__main__":
+if __name__ == "__main__":  
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", type=str, required=True)
